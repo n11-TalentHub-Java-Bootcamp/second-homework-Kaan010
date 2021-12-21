@@ -17,8 +17,8 @@ import java.util.Date;
 @Table(
         name = "URUN"
 )
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "kategori"})
-@JsonFilter("UrunFilter")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "category"})
+@JsonFilter("ProductFilter")
 public class Product implements Serializable {
 
     public Product() {

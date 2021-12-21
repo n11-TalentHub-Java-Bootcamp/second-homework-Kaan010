@@ -1,0 +1,7 @@
+╦╔═┌─┐┌─┐┌┐┌   _     _        __   _
+╠╩╗├─┤├─┤│││   |____/  |      | \  |
+╩ ╩┴ ┴┴ ┴┘└┘   |    \_ |_____ |  \_|
+
+
+${application.title} ${application.version}
+Powered by Spring Boot ${spring-boot.version}
