@@ -1,12 +1,13 @@
 package com.example.kkalanhw2.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 
 @Entity
 @Table(name = "PRODUCT_COMMENT")
-public class ProductComment {
+public class ProductComment implements Serializable {
 
     @SequenceGenerator(name = "generator", sequenceName = "COMMENT_ID_SEQ")
     @Id
