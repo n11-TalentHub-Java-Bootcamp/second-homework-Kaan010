@@ -10,14 +10,14 @@ import java.util.Optional;
 public class ProductService {
 
     @Autowired
-    private ProductDao urunDao;
+    private ProductDao productDao;
 
     public List<Product> findAll(){
-        return (List<Product>) urunDao.findAll();
+        return (List<Product>) productDao.findAll();
     }
 
     public Product findById(Long id){
-        Optional<Product> optionalUrun = urunDao.findById(id);
+        Optional<Product> optionalUrun = productDao.findById(id);
 
         Product urun = null;
         if (optionalUrun.isPresent()){
@@ -28,24 +28,24 @@ public class ProductService {
     }
 
     public Product save(Product urun){
-        urun = urunDao.save(urun);
+        urun = productDao.save(urun);
 
         return urun;
     }
 
     public void delete(Product urun){
-        urunDao.delete(urun);
+        productDao.delete(urun);
     }
 
     public void deleteById(Long id){
-        urunDao.deleteById(id);
+        productDao.deleteById(id);
     }
 
     public long count(){
-        return urunDao.count();
+        return productDao.count();
     }
 
     public List<Product> findAllByKategoriOrderByIdDesc(Long kategoriId){
-        return urunDao.findAllByKategoriOrderByIdDesc(kategoriId);
+        return productDao.findAllByKategoriOrderByIdDesc(kategoriId);
     }
 }
