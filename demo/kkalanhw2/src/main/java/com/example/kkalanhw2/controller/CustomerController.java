@@ -2,15 +2,12 @@ package com.example.kkalanhw2.controller;
 
 import com.example.kkalanhw2.converter.CustomerConverter;
 import com.example.kkalanhw2.dto.CustomerDto;
-import com.example.kkalanhw2.entity.Customer;
 import com.example.kkalanhw2.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 
 @RestController
@@ -23,40 +20,36 @@ public class CustomerController {
     @Autowired
     private CustomerConverter customerConverter;
 
-    @GetMapping("")
-    public List<CustomerDto> findAll() {
-        return Optional.ofNullable(customerService.findAll())
-                .orElseGet(Collections::emptyList)
-                .stream()
-                .map(customer->customerConverter.customerToCustomerDto(customer))
-                .collect(Collectors.toList());
+    @GetMapping
+    public ResponseEntity<List<CustomerDto>> findAllCustomers() {
+        return ResponseEntity.ok(customerService.findAll());
     }
 
     @GetMapping("/{userName}")
-    public CustomerDto findByUserName(@PathVariable String userName){
-        return Optional.ofNullable(customerService.findByUserName(userName))
-                .map(customer -> customerConverter.customerToCustomerDto(customer))
-                .orElse(null);
+    public ResponseEntity<CustomerDto> findCustomerByUserName(@PathVariable String userName){
+        return ResponseEntity.ok(customerService.findByUserName(userName));
     }
 
     @GetMapping("/{telephone}")
-    public CustomerDto findByTelephone(@PathVariable String telephone){
-        return Optional.ofNullable(customerService.findByTelephone(telephone))
-                .map(customer -> customerConverter.customerToCustomerDto(customer))
-                .orElse(null);
+    public ResponseEntity<CustomerDto> findCustomerByTelephone(@PathVariable String telephone){
+        return ResponseEntity.ok(customerService.findByTelephone(telephone));
     }
 
-    @PostMapping("")
-    public CustomerDto save(@RequestBody CustomerDto customerDto){
-        Customer customer = customerConverter.customerDtoToCustomer(customerDto);
-        return customerConverter.customerToCustomerDto(customerService.save(customer));
+    @PostMapping
+    public ResponseEntity<CustomerDto> createCustomer(@RequestBody CustomerDto customerDto){
+        return ResponseEntity.ok(customerService.createCustomer(customerDto));
     }
-
 
     @DeleteMapping("/{userName/{telephone}")
-    public void delete(@PathVariable String userName, @PathVariable String telephone){
-
+    public ResponseEntity<Void> deleteCustomer(@PathVariable String userName, @PathVariable String telephone){
         customerService.deleteByUserNameAndTelephone(userName,telephone);
+        return ResponseEntity.ok().build();
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<CustomerDto> updateCustomer(@PathVariable Long id,
+                                                      @RequestBody CustomerDto customer){
+        return ResponseEntity.ok(customerService.updateCustomer(id,customer));
     }
 
 
