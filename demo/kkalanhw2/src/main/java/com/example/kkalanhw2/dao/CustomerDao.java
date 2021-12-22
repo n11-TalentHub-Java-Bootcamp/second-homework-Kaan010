@@ -14,6 +14,12 @@ public interface CustomerDao extends JpaRepository<Customer,Long> {
 
     Customer findByTelephone(String telephone);
 
-    Custod
+    void deleteCustomerByUserNameAndTelephone(String userName,String telephone);
+
+    Customer findCustomerByUserNameAndTelephone(String userName, String telephone);
+
+
+
+
 
 }

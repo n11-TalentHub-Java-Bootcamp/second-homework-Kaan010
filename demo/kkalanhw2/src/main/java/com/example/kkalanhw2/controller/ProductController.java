@@ -4,7 +4,7 @@ import com.example.kkalanhw2.converter.ProductConverter;
 import com.example.kkalanhw2.dto.ProductDetailDto;
 import com.example.kkalanhw2.dto.ProductDto;
 import com.example.kkalanhw2.entity.Product;
-import com.example.kkalanhw2.exception.ProductNotFoundException;
+import com.example.kkalanhw2.exception.EntityNotFoundException;
 import com.example.kkalanhw2.service.CategoryService;
 import com.example.kkalanhw2.service.ProductService;
 import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
@@ -52,7 +52,7 @@ public class ProductController {
         Product urun = urunEntityService.findById(id);
 
         if (urun == null)
-            throw new ProductNotFoundException("Urun not found. id: " + id);
+            throw new EntityNotFoundException(Product.ENTITY_NAME,id);
 
         WebMvcLinkBuilder linkToUrun = WebMvcLinkBuilder.linkTo(
                 WebMvcLinkBuilder.methodOn(this.getClass())
@@ -82,7 +82,7 @@ public class ProductController {
         Product urun = urunEntityService.findById(id);
 
         if (urun == null){
-            throw new ProductNotFoundException("Urun not found. id: " + id);
+            throw new EntityNotFoundException(Product.ENTITY_NAME,id);
         }
 
         ProductDetailDto urunDetayDto = ProductConverter.INSTANCE.convertUrunToUrunDetayDto(urun);

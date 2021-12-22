@@ -1,10 +1,15 @@
 package com.example.kkalanhw2.entity;
+import com.example.kkalanhw2.dto.CustomerDto;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
 @Table(name = "CUSTOMER")
 public class Customer implements Serializable {
+
+    public static final String ENTITY_NAME = "Customer";
+
     @SequenceGenerator(name = "generator", sequenceName = "customer_ID_SEQ")
     @Id
     @GeneratedValue(generator = "generator")
@@ -85,4 +90,5 @@ public class Customer implements Serializable {
         this.telephone = telephone;
         this.userName = userName;
     }
+
 }

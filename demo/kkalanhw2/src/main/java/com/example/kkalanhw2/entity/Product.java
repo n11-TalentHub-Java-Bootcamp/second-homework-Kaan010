@@ -21,16 +21,7 @@ import java.util.Date;
 @JsonFilter("ProductFilter")
 public class Product implements Serializable {
 
-    public Product() {
-    }
-
-    public Product(Long id, String name, BigDecimal price, Date recordDate, Category category) {
-        this.id = id;
-        this.name = name;
-        this.price = price;
-        this.recordDate = recordDate;
-        this.category = category;
-    }
+    public static final String ENTITY_NAME = "Product";
 
     @SequenceGenerator(name = "generator", sequenceName = "URUN_ID_SEQ")
     @Id
@@ -53,6 +44,19 @@ public class Product implements Serializable {
             foreignKey = @ForeignKey(name = "FK_URUN_KATEGORI_ID")
     )
     private Category category;
+
+
+
+    public Product() {
+    }
+
+    public Product(Long id, String name, BigDecimal price, Date recordDate, Category category) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.recordDate = recordDate;
+        this.category = category;
+    }
 
     public Long getId() {
         return id;

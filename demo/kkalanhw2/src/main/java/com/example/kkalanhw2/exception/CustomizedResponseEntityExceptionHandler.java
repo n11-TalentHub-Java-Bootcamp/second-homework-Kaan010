@@ -29,7 +29,7 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
     }
 
     @ExceptionHandler
-    public final ResponseEntity<Object> handleAllExceptions(ProductNotFoundException ex, WebRequest webRequest){
+    public final ResponseEntity<Object> handleAllExceptions(UrunNotFoundException ex, WebRequest webRequest){
 
         Date errorDate = new Date();
         String message = ex.getMessage();
@@ -51,4 +51,6 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
 
         return new ResponseEntity(exceptionResponse, HttpStatus.BAD_REQUEST);
     }
+
+
 }
