@@ -4,7 +4,7 @@ import com.example.kkalanhw2.converter.CustomerConverter;
 import com.example.kkalanhw2.dao.CustomerDao;
 import com.example.kkalanhw2.dto.CustomerDto;
 import com.example.kkalanhw2.entity.Customer;
-import com.example.kkalanhw2.exception.CustomerNotValidException;
+import com.example.kkalanhw2.exception.CustomException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -49,7 +49,7 @@ public class CustomerService {
     public void deleteByUserNameAndTelephone(String userName, String telephone) {
         Customer customer = customerDao.findCustomerByUserNameAndTelephone(userName, telephone);
         if (customer == null)
-            throw new CustomerNotValidException(userName +
+            throw new CustomException(userName +
                     " kullanıcı adı ile " +
                     telephone +
                     " telefonu bilgileri uyusmamaktadır.");

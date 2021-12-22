@@ -17,9 +17,6 @@ public class CustomerController {
     @Autowired
     private CustomerService customerService;
 
-    @Autowired
-    private CustomerConverter customerConverter;
-
     @GetMapping
     public ResponseEntity<List<CustomerDto>> findAllCustomers() {
         return ResponseEntity.ok(customerService.findAll());
@@ -40,7 +37,7 @@ public class CustomerController {
         return ResponseEntity.ok(customerService.createCustomer(customerDto));
     }
 
-    @DeleteMapping("/{userName/{telephone}")
+    @DeleteMapping("/{userName}/{telephone}")
     public ResponseEntity<Void> deleteCustomer(@PathVariable String userName, @PathVariable String telephone){
         customerService.deleteByUserNameAndTelephone(userName,telephone);
         return ResponseEntity.ok().build();

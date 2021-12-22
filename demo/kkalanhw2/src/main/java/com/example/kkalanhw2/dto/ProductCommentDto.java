@@ -8,6 +8,7 @@ public class ProductCommentDto {
     private String comment;
     private Date commantDate;
     private Long productId;
+    private Long customerId;
 
     @Override
     public String toString() {
@@ -70,6 +71,4 @@ public class ProductCommentDto {
         this.productId = productId;
         this.customerId = customerId;
     }
-
-    private Long customerId;
 }
