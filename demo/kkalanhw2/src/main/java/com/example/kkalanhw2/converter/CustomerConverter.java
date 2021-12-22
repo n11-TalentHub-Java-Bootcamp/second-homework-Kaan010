@@ -17,6 +17,8 @@ import java.util.List;
 )
 public interface CustomerConverter {
 
+    CustomerConverter INSTANCE = Mappers.getMapper(CustomerConverter.class);
+
     CustomerDto customerToCustomerDto(Customer customer);
     Customer customerDtoToCustomer(CustomerDto customerDto);
 

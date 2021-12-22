@@ -18,28 +18,24 @@ public class ProductCommentService {
     @Autowired
     private ProductCommentDao productCommentDao;
 
-    @Autowired
-    private ProductCommentConverter productCommentConverter;
-
-
     public List<ProductCommentDto> findAllByCustomerId(Long customerId){
         return productCommentDao.findAllByCustomerId(customerId)
                 .stream()
-                .map(productCommentConverter::productCommentToProductCommentDto)
+                .map(ProductCommentConverter.INSTANCE::productCommentToProductCommentDto)
                 .collect(Collectors.toList());
     }
 
     public List<ProductCommentDto> findAllByProductId(Long productId){
         return productCommentDao.findAllByProductId(productId)
                 .stream()
-                .map(productCommentConverter::productCommentToProductCommentDto)
+                .map(ProductCommentConverter.INSTANCE::productCommentToProductCommentDto)
                 .collect(Collectors.toList());
     }
 
     public ProductCommentDto createProductComment(ProductCommentDto productCommentDto){
-        ProductComment productComment=productCommentConverter.productCommentDtoToProductComment(productCommentDto);
+        ProductComment productComment=ProductCommentConverter.INSTANCE.productCommentDtoToProductComment(productCommentDto);
         productCommentDao.save(productComment);
-        return productCommentConverter.productCommentToProductCommentDto(productComment);
+        return ProductCommentConverter.INSTANCE.productCommentToProductCommentDto(productComment);
     }
 
     public void deleteProductComment(Long id){

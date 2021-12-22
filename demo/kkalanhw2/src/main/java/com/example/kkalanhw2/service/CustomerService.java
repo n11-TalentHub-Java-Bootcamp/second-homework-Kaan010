@@ -18,32 +18,30 @@ public class CustomerService {
     @Autowired
     private CustomerDao customerDao;
 
-    @Autowired
-    private CustomerConverter customerConverter;
 
     public List<CustomerDto> findAll() {
         return customerDao.findAll()
                 .stream()
-                .map(customer->customerConverter.customerToCustomerDto(customer))
+                .map(CustomerConverter.INSTANCE::customerToCustomerDto)
                 .collect(Collectors.toList());
     }
 
     public CustomerDto findByUserName(String userName) {
         return Optional.ofNullable(customerDao.findByUserName(userName))
-                .map(customer->customerConverter.customerToCustomerDto(customer))
+                .map(CustomerConverter.INSTANCE::customerToCustomerDto)
                 .orElseGet(CustomerDto::new);
     }
 
     public CustomerDto findByTelephone(String telephone) {
         return Optional.ofNullable(customerDao.findByTelephone(telephone))
-                .map(customer -> customerConverter.customerToCustomerDto(customer))
+                .map(CustomerConverter.INSTANCE::customerToCustomerDto)
                 .orElseGet(CustomerDto::new);
     }
 
     public CustomerDto createCustomer(CustomerDto customerDto) {
-        Customer customer = customerConverter.customerDtoToCustomer(customerDto);
+        Customer customer = CustomerConverter.INSTANCE.customerDtoToCustomer(customerDto);
         customerDao.save(customer);
-        return customerConverter.customerToCustomerDto(customer);
+        return CustomerConverter.INSTANCE.customerToCustomerDto(customer);
     }
 
     public void deleteByUserNameAndTelephone(String userName, String telephone) {
@@ -66,7 +64,7 @@ public class CustomerService {
             customer.setUserName(input.getUserName());
             customerDao.save(customer);
         });
-        return customerOptional.map(customerConverter::customerToCustomerDto).orElse(new CustomerDto());
+        return customerOptional.map(CustomerConverter.INSTANCE::customerToCustomerDto).orElse(new CustomerDto());
     }
 
 

@@ -1,10 +1,12 @@
 package com.example.kkalanhw2.entity;
 
+import lombok.Data;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
-
+@Data
 @Entity
 @Table(name = "PRODUCT_COMMENT")
 public class ProductComment implements Serializable {
@@ -27,6 +29,7 @@ public class ProductComment implements Serializable {
 
     @Column(name = "CUSTOMER_ID")
     private Long customerId;
+
 
 
 }
